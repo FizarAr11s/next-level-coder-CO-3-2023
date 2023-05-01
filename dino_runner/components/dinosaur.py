@@ -76,8 +76,8 @@ class Dinosaur(Sprite):
     def jump(self):
         self.image = JUMPING
         if self.dino_jump:
-            self.dino_rect.y -= self.jump_vel * 4 # Salto
-            self.jump_vel -= 0.8 # Salto, cuando llega a negativo, baja   
+            self.dino_rect.y -= self.jump_vel * 4 
+            self.jump_vel -= 0.8 
         if self.jump_vel < -self.JUMP_VEL:
             self.dino_rect.y = self.POS_Y
             self.dino_jump = False
