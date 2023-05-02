@@ -52,6 +52,7 @@ class Dinosaur(Sprite):
 
     def draw(self, screen):
         screen.blit(self.image, self.dino_rect)
+        
     def run(self):
         self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1]
         self.dino_rect = self.image.get_rect()
