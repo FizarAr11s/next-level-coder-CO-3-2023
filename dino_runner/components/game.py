@@ -1,9 +1,18 @@
 import pygame
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import (
+    BG,
+    ICON,
+    SCREEN_HEIGHT,
+    SCREEN_WIDTH,
+    TITLE,
+    FPS,
+    FONT_ARIAL
+    )
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import Obstacle_manager
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
+from dino_runner.components.player_hearts.heart_manager import Heart_manager
 
 class Game:
     def __init__(self):
@@ -17,10 +26,17 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.points = 0
-        
         self.player = Dinosaur()
         self.obstacle_manager = Obstacle_manager()
         self.power_up_manager = PowerUpManager()
+        self.heart_manager = Heart_manager()
+        
+    def increase_score(self):
+        self.points += 1
+        if self.points % 100 == 0:
+            self.game_speed += 1
+            
+        self.player.check_invincibility()
         
     def run(self):
         # Game loop: events - update - draw
@@ -41,8 +57,8 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self.game_speed, self)
         self.power_up_manager.update(self.points, self.game_speed, self.player)
-        self.points += 1
-
+        self.increase_score()
+        
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255, 255, 255)) #codigo RGB
@@ -50,6 +66,8 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
+        self.draw_score() 
+        self.heart_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -61,3 +79,11 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+
+    def draw_score(self):
+        font = pygame.font.Font(FONT_ARIAL, 30)
+        surface = font.render(str(self.points), True, (0, 0, 0))
+        rect = surface.get_rect()
+        rect.x = 1000
+        rect.y = 10
+        self.screen.blit(surface, rect)
