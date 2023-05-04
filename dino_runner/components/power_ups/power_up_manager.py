@@ -21,18 +21,14 @@ class PowerUpManager():
                 self.hammer_on = False
                 match self.type:
                     case 0:
-                        print("generating power up")
                         self.when_appears = random.randint(self.when_appears + 200, 500 + self.when_appears)
                         self.power_ups.append(Shield())                        
                         self.shield_on = True
-                        print(f"escudo", self.shield_on )
                         
                     case 1:
-                        print("generating power up")
                         self.when_appears = random.randint(self.when_appears + 200, 500 + self.when_appears)
                         self.power_ups.append(Hammer())
                         self.hammer_on = True
-                        print(f"martillo ",self.hammer_on)
     
     def update(self, points, game_speed, player):
         self.generate_power_ups(points)
@@ -48,7 +44,7 @@ class PowerUpManager():
                 if self.hammer_on:
                     self.hammer_on = False
                     player.hammer = True  
-                               
+
                 player.type = power_up.type
                 
                 start_time = pygame.time.get_ticks()

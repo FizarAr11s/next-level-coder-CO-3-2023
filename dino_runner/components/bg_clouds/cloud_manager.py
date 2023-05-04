@@ -14,13 +14,10 @@ class Cloud_manager:
             match type:
                 case 0:
                     self.objects.append(Cloud(CLOUD))
-                    
-
-            
+        
         for object in self.objects:
             object.update(game_speed, self.objects)
             
-    
     def draw(self, screen):
         for object in self.objects:
             object.draw(screen)

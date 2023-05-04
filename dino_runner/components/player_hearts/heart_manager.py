@@ -4,7 +4,6 @@ class Heart_manager:
     def __init__(self):
         self.heart_count = 4
         
-    
     def reduce_heart(self):
         self.heart_count -= 1
         

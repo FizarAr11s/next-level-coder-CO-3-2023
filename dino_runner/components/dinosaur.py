@@ -36,7 +36,6 @@ class Dinosaur(Sprite):
         self.dino_jump = False
         self.jump_vel = self.JUMP_VEL
         self.jump_sound = pygame.mixer.Sound("Jump.mp3")
-
         self.setup_states()
         
     def setup_states(self):
@@ -53,7 +52,6 @@ class Dinosaur(Sprite):
             self.duck()
         if self.dino_run:
             self.run()
-
 
         if user_input[pygame.K_DOWN] and not self.dino_jump:
             self.dino_run = False
@@ -100,12 +98,10 @@ class Dinosaur(Sprite):
             self.dino_jump = False
             self.jump_vel = self.JUMP_VEL
 
-
     def check_invincibility(self):
         if self.shield or self.hammer:
             time_to_show = round((self.shield_time_up - pygame.time.get_ticks())/ 1000, 2)
 
-            
             if not time_to_show >= 0:
                 self.shield = False
                 self.hammer = False
