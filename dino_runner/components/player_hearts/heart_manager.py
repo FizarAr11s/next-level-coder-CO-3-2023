@@ -7,7 +7,10 @@ class Heart_manager:
     
     def reduce_heart(self):
         self.heart_count -= 1
-    
+        
+    def aument_heart(self):
+        self.heart_count += 2
+            
     def draw(self, screen):
         pos_x = 10
         pos_y = 20
